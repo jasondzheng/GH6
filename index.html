@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>HomeBase</title> 
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head> 
+<body>
+
+  <button id="login" class="logins">Shelter Login</button>
+    <script type="text/javascript">
+        document.getElementById("longin").onclick = function () {
+            location.href = "/~jasondzheng/GH6/GH6git/loginPage.html";
+        };
+    </script>
+
+  <div class="logouts">
+    <div id="loggedUser" data-tog="0"></div>
+    <button class="btns" id="logout">Logout</button>
+  </div>
+
+  <div class="steps">
+    <button id="step1" class="float-left">Locate</button>
+    <script type="text/javascript">
+        document.getElementById("step1").onclick = function () {
+            location.href = "/~jasondzheng/GH6/GH6git/Step_1/";
+        };
+    </script>
+    <button id="step2" class="float-middle">Assess</button>
+    <script type="text/javascript">
+        document.getElementById("step2").onclick = function () {
+            location.href = "/~jasondzheng/GH6/GH6git/Step_2/";
+        };
+    </script>
+    <button id="step3" class="float-right">Learn</button>
+    <script type="text/javascript">
+        document.getElementById("step3").onclick = function () {
+            location.href = "/~jasondzheng/GH6/GH6git/Step_3/";
+        };
+    </script>
+ </div>
+ <script type="text/javascript" src="mainpage.js"></script>
+</body>
+</html>
