@@ -57,7 +57,6 @@ function homeload(){
 	      maxWidth: 50,
 	      maxHeight: 50,
 	      borderWidth: 1,
-	      borderColor: '#000',
 	      disableAutoPan: true,
 	      hideCloseButton: true,
 	      arrowSize: 0,
