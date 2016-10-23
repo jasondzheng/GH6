@@ -28,7 +28,7 @@ function homeload(){
 
 		for (i = 0; i < response.length; i++) {  
 			//Creates each of the contents for each marker
-			content[i] = '<div><div class=shelter_name>' + response[i].shelter_name + '</div>';
+			content[i] = '<div><div class=shelter_name style="text-align: center;">' + response[i].shelter_name + '</div>';
 			content[i] += '<div class="beds">Beds: '+response[i].bed[0].bed_avail+'</div>';
 			content[i] +='<div class="food">Food: '+ response[i].food[0].food_avail+'</div>';
 			content[i] += '</div>';
