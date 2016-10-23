@@ -5,6 +5,12 @@ create table beds (shelter_id mediumint unsigned not null, available mediumint u
 create table requests (id mediumint unsigned not null auto_increment, name varchar(100) not null, address varchar(200) not null, primary key (id));
 
 insert into users (username, password) values ("admin", "admin");
-insert into homeless_shelters (name, user_id, lattitude, longitude) values ("homelessPeeps", 1, 38.6270, -90.1994);
+insert into homeless_shelters (name, user_id, latitude, longitude) values ("homelessPeeps", 1, 38.629976, -90.209952);
 insert into food (shelter_id, available) values (1,10);
 insert into beds (shelter_id, available) values (1,10);
+insert into homeless_shelters (name, user_id, latitude, longitude) values ("soupKitchen", 2, 38.626905, -90.195449);
+insert into food (shelter_id, available) values (2,10);
+insert into beds (shelter_id, available) values (2,10);
+insert into homeless_shelters (name, user_id, latitude, longitude) values ("homelessSad", 3, 38.620077, -90.207087);
+insert into food (shelter_id, available) values (3,10);
+insert into beds (shelter_id, available) values (3,10);

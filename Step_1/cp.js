@@ -12,95 +12,95 @@ var infoBubbles = [];
 
 //This functoon loads the map when the website is first loaded
 function homeload(){
-//Centers at location
-map = new google.maps.Map(document.getElementById('map'), {
-zoom: 16,
-center: new google.maps.LatLng(centerLat, centerLng),
-mapTypeId: google.maps.MapTypeId.ROADMAP
-});
+	//Centers at location
+	map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 16,
+		center: new google.maps.LatLng(centerLat, centerLng),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
 
-var pdata;
-$.ajax({type:'POST', url: 'fetchInfo.php', data: pdata, dataType: 'json', success: function(response) {
+	var pdata;
+	$.ajax({type:'POST', url: 'fetchInfo.php', data: pdata, dataType: 'json', success: function(response) {
 
-var marker, i;
+		var marker, i;
 
-for (i = 0; i < response.length; i++) {  
-//Creates each of the contents for each marker
-content[i] = '<div class=shelter_name style="text-align: center; font-family: Calibri; color: white; font-weight: bold; padding-top: 10px;">' 
-content[i] += '<div class="beds">Beds: '+response[i].bed[0].bed_avail+'</div>';
-content[i] +='<div class="food">Food: '+ response[i].food[0].food_avail+'</div>';
-content[i] += '</div>';
+		for (i = 0; i < response.length; i++) {  
+			//Creates each of the contents for each marker
+			content[i] = '<div class=shelter_name style="text-align: center; font-family: Calibri; color: white; font-weight: bold; padding-top: 10px;">' 
+			content[i] += '<div class="beds">Beds: '+response[i].bed[0].bed_avail+'</div>';
+			content[i] +='<div class="food">Food: '+ response[i].food[0].food_avail+'</div>';
+			content[i] += '</div>';
 
-marker = new google.maps.Marker({
-position: new google.maps.LatLng(response[i].lat, response[i].lng),
-map: map,
-icon: 'home.png'
-});
-//infowindow = new google.maps.InfoWindow();
-markers[i] = marker;
-//infowindow.setContent(content[i]);
-//infowindow.open(map, markers[i]);
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(response[i].lat, response[i].lng),
+				map: map,
+				icon: 'home.png'
+			});
+			//infowindow = new google.maps.InfoWindow();
+			markers[i] = marker;
+			//infowindow.setContent(content[i]);
+			//infowindow.open(map, markers[i]);
 
-infoBubbles[i] = new InfoBubble({
-     map: map,
-     content: content[i],
-     shadowStyle: 0,
-     padding: 0,
-     backgroundColor: 'rgba(66, 134, 244, 0.5)',
-     borderColor: 'rgba(66, 134, 244, 0.5)',
-     borderRadius: 50,
-     arrowSize: 0,
-     minWidth: 48,
-     minHeight: 48,
-     maxWidth: 48,
-     maxHeight: 48,
-     borderWidth: 0,
-     disableAutoPan: true,
-     hideCloseButton: true,
-     arrowSize: 0,
-     backgroundClassName: 'transparent',
-     position: marker.position
-});
-markers[i] = marker;
-infoBubbles[i].open(map, markers[i]);
-}
-}});
+			infoBubbles[i] = new InfoBubble({
+	      map: map,
+	      content: content[i],
+	      shadowStyle: 0,
+	      padding: 0,
+	      backgroundColor: 'rgba(66, 134, 244, 0.5)',
+	      borderColor: 'rgba(66, 134, 244, 0.5)',
+	      borderRadius: 50,
+	      arrowSize: 0,
+	      minWidth: 48,
+	      minHeight: 48,
+	      maxWidth: 48,
+	      maxHeight: 48,
+	      borderWidth: 0,
+	      disableAutoPan: true,
+	      hideCloseButton: true,
+	      arrowSize: 0,
+	      backgroundClassName: 'transparent',
+	      position: marker.position
+			});
+			markers[i] = marker;
+			infoBubbles[i].open(map, markers[i]);
+		}
+	}});
 }
 
 //Helper function used for dealing with the logins
 function toggleState(item){
-if($(item).attr("data-tog") == "0") {
-$(item).attr("data-tog","1");
-} 
-else {
-$(item).attr("data-tog", "0");
-}
+	if($(item).attr("data-tog") == "0") {
+		$(item).attr("data-tog","1");
+	} 
+	else {
+		$(item).attr("data-tog", "0");
+	}
 }
 
 $("#update").click( function(){
-var beds_update = $("#beds_update").val();
-var food_update = $("#food_update").val();
-var pdata = {
-beds_avail : beds_update,
-food_avail : food_update
-};
-if (beds_update === "" || food_update === ""){
-$("#updateMsg").empty();
-$("#updateMsg").append('<div class="failText">Failed</div>');
-return;
-}
-$.ajax({type:'POST', url: 'update_avail.php', data: pdata, dataType: 'json', success: function(response) {
-if(response.success){ 
-token=response.token;
- 
-$("#updateMsg").empty();
-$("#updateMsg").append('<div class="failText">Failed</div>');
-load();
-}
-else{
-$("#loginUserMsg").empty();
-$("#loginUserMsg").append('<div class="failText">'+response.message+'</div>');
-}
-}
+	var beds_update = $("#beds_update").val();
+	var food_update = $("#food_update").val();
+	var pdata = {
+		beds_avail : beds_update,
+		food_avail : food_update
+	};
+	if (beds_update === "" || food_update === ""){
+		$("#updateMsg").empty();
+		$("#updateMsg").append('<div class="failText">Failed</div>');
+		return;
+	}
+	$.ajax({type:'POST', url: 'update_avail.php', data: pdata, dataType: 'json', success: function(response) {
+		if(response.success){ 
+			token=response.token;
+			
+			$("#updateMsg").empty();
+			$("#updateMsg").append('<div class="failText">Failed</div>');
+			load();
+		}
+		else{
+			$("#loginUserMsg").empty();
+			$("#loginUserMsg").append('<div class="failText">'+response.message+'</div>');
+		}
+	}
 });
 });

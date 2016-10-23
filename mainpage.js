@@ -10,20 +10,22 @@ function toggleState(item){
 	else {
 		$(item).attr("data-tog", "0");
 	}
-};
+}
 
 //Displays the login form
 $("#login").click( function(){
-	if ($(this).attr("data-tog") == "0"){
+	if ($(this).attr("data-tog") == "1"){
 		$(".userLoginDetails").show();
+		$(".everything").hide();
 	}
 	else{
 		$(".userLoginDetails").hide();
+		$(".everything").show();
 	}
 	toggleState(this);
 });
 
-//Submits the login form and reloads the page
+
 $("#submitLogin").click( function(){
 	usrname = $("#username").val();
 	var usrpass = $("#password").val();
@@ -43,12 +45,13 @@ $("#submitLogin").click( function(){
 			$(".userLoginDetails").hide();
 			$(".logins").hide();
 			$(".logouts").show();
+			$(".everything").show();
 			$("#loginUserMsg").empty();
 			$("#userlogin")[0].reset();
 			$("#loggedUser").append('<div>Hello '+usrname+'!</div>');
 			usrId=response.usrId;
 			toggleState($("#login"));
-			load();
+			toggleState($("#logout"));
 		}
 		else{
 			$("#loginUserMsg").empty();
@@ -69,4 +72,36 @@ $("#logout").click( function(){
 			homeload();
 		}}
 	});
+});
+
+
+$("#submitCreateUser").click( function(){
+	var newusrname = $("#newUsername").val();
+	var newusrpass = $("#newPassword").val();
+	if (newusrname === "" || newusrpass === ""){
+		$("#userCreateMsg").empty();
+		$("#userCreateMsg").append('<div class="failText">Invalid Username or Password</div>');
+		return;
+	}
+	var pdata = {
+		newUsername : newusrname,
+		newPassword : newusrpass
+	};
+	$.ajax({type:'POST', url: 'createUser.php', data: pdata, dataType: 'json', success: function(response) {
+		if(response.success){ 
+			$("#userCreateMsg").empty();
+			$("#userCreateMsg").append('<div class="successText">Success!!</div>');
+			setTimeout(function() {
+				$(".userCreateDetails").fadeOut(300);
+				$("#userCreateMsg").empty();
+				$("#userCreate")[0].reset();
+			},1000);
+			toggleState($("#createUser"));
+		}
+		else{
+			$("#userCreateMsg").empty();
+			$("#userCreateMsg").append('<div class="failText">'+response.message+'</div>');
+		}
+	}
+});
 });
