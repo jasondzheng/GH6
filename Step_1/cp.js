@@ -28,7 +28,7 @@ function homeload(){
 
 		for (i = 0; i < response.length; i++) {  
 			//Creates each of the contents for each marker
-			content[i] = '<div><div class=shelter_name style="text-align: center;">' + response[i].shelter_name + '</div>';
+			content[i] = '<div><div class=shelter_name style="text-align: center; font-family: Calibri; font-color: "white"">' + response[i].shelter_name + '</div>';
 			content[i] += '<div class="beds">Beds: '+response[i].bed[0].bed_avail+'</div>';
 			content[i] +='<div class="food">Food: '+ response[i].food[0].food_avail+'</div>';
 			content[i] += '</div>';
@@ -48,7 +48,8 @@ function homeload(){
 	      content: content[i],
 	      shadowStyle: 0,
 	      padding: 5,
-	      backgroundColor: '#fff',
+	      backgroundColor: 'rgb(66, 134, 244)',
+	      borderColor: 'rgb(66, 134, 244)',
 	      borderRadius: 50,
 	      arrowSize: 0,
 	      minWidth: 50,
@@ -56,7 +57,6 @@ function homeload(){
 	      maxWidth: 50,
 	      maxHeight: 50,
 	      borderWidth: 1,
-	      borderColor: '#000',
 	      disableAutoPan: true,
 	      hideCloseButton: true,
 	      arrowSize: 0,
