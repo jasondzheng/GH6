@@ -8,15 +8,13 @@ var content = [];
 var centerLat = 38.6270;
 var centerLng = -90.1994;
 var map;
-// var infowindow;
-// var infowindows = [];
 var infoBubbles = [];
 
 //This functoon loads the map when the website is first loaded
 function homeload(){
 	//Centers at location
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 15,
+		zoom: 16,
 		center: new google.maps.LatLng(centerLat, centerLng),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
@@ -28,7 +26,7 @@ function homeload(){
 
 		for (i = 0; i < response.length; i++) {  
 			//Creates each of the contents for each marker
-			content[i] = '<div><div class=shelter_name style="text-align: center; font-family: Calibri; font-color: "white"">' + response[i].shelter_name + '</div>';
+			content[i] = '<div class=shelter_name style="text-align: center; font-family: Calibri; color: white; font-weight: bold; padding-top: 10px;">' 
 			content[i] += '<div class="beds">Beds: '+response[i].bed[0].bed_avail+'</div>';
 			content[i] +='<div class="food">Food: '+ response[i].food[0].food_avail+'</div>';
 			content[i] += '</div>';
@@ -38,33 +36,33 @@ function homeload(){
 				map: map,
 				icon: 'home.png'
 			});
-			// infowindows[i] = new google.maps.InfoWindow();
-			// markers[i] = marker;
-			// infowindows[i].setContent(content[i]);
-			// infowindows[i].open(map, marker);
+			//infowindow = new google.maps.InfoWindow();
+			markers[i] = marker;
+			//infowindow.setContent(content[i]);
+			//infowindow.open(map, markers[i]);
 
 			infoBubbles[i] = new InfoBubble({
 	      map: map,
 	      content: content[i],
 	      shadowStyle: 0,
-	      padding: 5,
-	      backgroundColor: 'rgb(66, 134, 244)',
-	      borderColor: 'rgb(66, 134, 244)',
+	      padding: 0,
+	      backgroundColor: 'rgba(66, 134, 244, 0.5)',
+	      borderColor: 'rgba(66, 134, 244, 0.5)',
 	      borderRadius: 50,
 	      arrowSize: 0,
-	      minWidth: 50,
-	      minHeight: 50,
-	      maxWidth: 50,
-	      maxHeight: 50,
-	      borderWidth: 1,
+	      minWidth: 48,
+	      minHeight: 48,
+	      maxWidth: 48,
+	      maxHeight: 48,
+	      borderWidth: 0,
 	      disableAutoPan: true,
 	      hideCloseButton: true,
 	      arrowSize: 0,
-	      backgroundClassName: 'transparent'
+	      backgroundClassName: 'transparent',
+	      position: marker.position
 			});
 			markers[i] = marker;
-			infoBubbles[i].open(map, marker);
-
+			infoBubbles[i].open(map, markers[i]);
 		}
 	}});
 }
