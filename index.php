@@ -9,20 +9,31 @@
 <body>
   <div class="userCreateDetails">
   <div>
-    <form id="userCreate">
-      <br> Please Input the details for registering: <br>
-      Username <input type="text"  name="newUsername" id="newUsername">  <br>
-      Password <input type="password"  name="newPassword" id="newPassword">  <br>
-      <input id="submitCreateUser" type="button" name="submit" value="Create User"/>
-    </form>
+    <?php
+    session_start();
+
+    if (!isset($_SESSION['username']) {
+      echo '<form id="userCreate">
+        <br> Please Input the details for registering: <br>
+        Username <input type="text"  name="newUsername" id="newUsername">  <br>
+        Password <input type="password"  name="newPassword" id="newPassword">  <br>
+        <input id="submitCreateUser" type="button" name="submit" value="Create User"/>
+      </form>';
+    }
+    ?>
     <div id="userCreateMsg"></div> 
   </div>
 </div>
-  <button id="login" class="logins" data-tog = "1">Shelter Login</button>
-  <div class="logouts">
-    <div id="loggedUser" data-tog="0"></div>
-    <button class="btns" id="logout">Logout</button>
-  </div>
+  <?php
+  if (!isset($_SESSION['username']) {  
+    echo '<button id="login" class="logins" data-tog = "1">Shelter Login</button>';
+  } else {
+    echo '<div class="logouts">
+      <div id="loggedUser" data-tog="0"></div>
+      <button class="btns" id="logout">Logout</button>
+    </div>';
+  }
+  ?>
   <div class = "everything">
   <div class="steps">
     <button id="step1" class="float-left">Locate</button>
