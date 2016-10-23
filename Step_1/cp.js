@@ -67,9 +67,6 @@ function homeload(){
 
 		}
 	}});
-	if (usrId != ""){
-
-	}
 }
 
 //Helper function used for dealing with the logins
